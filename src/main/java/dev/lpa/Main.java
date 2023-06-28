@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        var philly = new Affiliation("city", "Philadelphia, PA", "US");
         BaseballTeam phillies1 = new BaseballTeam("Philadelphia Phillies");
         BaseballTeam astros1 =  new BaseballTeam("Houston Astros");
         scoreResult(phillies1, 3, astros1, 5);
@@ -14,8 +15,8 @@ public class Main {
         scoreResult(phillies2, 3, astros2, 5);
 //        Philadelphia Phillies (Ranked 3) lost to Houston Astros (Ranked 1)
 
-        Team<BaseballPlayer> phillies = new Team<>("Philadelphia Phillies");
-        Team<BaseballPlayer> astros =  new Team("Houston Astros");
+        Team<BaseballPlayer, Affiliation> phillies = new Team<>("Philadelphia Phillies", philly);
+        Team<BaseballPlayer, Affiliation> astros =  new Team("Houston Astros");
         scoreResult(phillies, 3, astros, 5);
 //        Philadelphia Phillies (Ranked 3) lost to Houston Astros (Ranked 1)
 
@@ -26,18 +27,39 @@ public class Main {
         var guthrie = new BaseballPlayer("D. Guthrie", "Center Fielder");
         phillies.addTeamMember(guthrie);
         phillies.listTeamMembers();
-//          Philadelphia Phillies Roster:
-//          [BaseballPlayer[name=B. Harper, position=Right Fielder], BaseballPlayer[name=B. Marsh, position=Right Fielder]]
+//        Philadelphia Phillies Roster: AFFILIATION: city (Philadelphia, PA in US)
+//        B. Harper
+//        B. Marsh
+//        D. Guthrie
 
         SportsTeam afc1 = new SportsTeam("Adelaide Crows");
-        Team<FootballPlayer> afc = new Team<>("Adelaide Crows");
+        Team<FootballPlayer, String> afc = new Team<>("Adelaide Crows", "City of Adelaide, South Australia, in AU");
         var tex = new FootballPlayer("Tex Walker", "Centre half forward");
         afc.addTeamMember(tex);
         var rory = new FootballPlayer("Rory Laird", "Midfield");
         afc.addTeamMember(rory);
         afc.listTeamMembers();
-//        Adelaide Crows Roster:
-//        [FootballPlayer[name=Tex Walker, position=Centre half forward], FootballPlayer[name=Rory Laird, position=Midfield]]
+//        Adelaide Crows Roster: AFFILIATION: City of Adelaide, South Australia, in AU
+//        Tex Walker
+//        Rory Laird
+
+        Team<VolleyballPlayer, Affiliation> adelaide = new Team<>("Adelaide Storm");
+        adelaide.addTeamMember(new VolleyballPlayer("N. Roberts", "Setter"));
+        adelaide.listTeamMembers();
+//        Adelaide Storm Roster:
+//        N. Roberts
+
+
+        var canberra = new Team<VolleyballPlayer, Affiliation>("Canberra Heat");
+        canberra.addTeamMember(new VolleyballPlayer("B. Black", "Opposite"));
+        canberra.listTeamMembers();
+//        Canberra Heat Roster:
+//        B. Black
+
+        scoreResult(canberra, 0, adelaide, 1);
+//        Canberra Heat (Ranked 3) lost to Adelaide Storm (Ranked 1)
+
+//        Team<Integer> melbourneVB = new Team<>("Melbourne Vipers");
     }
 
     public static void scoreResult(BaseballTeam team1, int t1_score, BaseballTeam team2, int t2_score) {
